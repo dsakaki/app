@@ -24,14 +24,39 @@ namespace WindowsFormsApp1
         public int ID { get => _ID; set => _ID = value; }
 
 
+
+
+        public void testBILLSP(int ID)
+        {
+            dbConnection db = new dbConnection();
+            db.openConnection();
+            SqlCommand cmd = new SqlCommand("GetHoaDon", db.Con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IDHD", ID);
+           
+            DataSet ds = new DataSet();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            adp.SelectCommand = cmd;
+            adp.Fill(ds, "HoaDon");
+
+
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
+            reportViewer1.LocalReport.ReportPath = "Report1.rdlc";
+            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsGetHoaDon", ds.Tables[0]));
+            reportViewer1.RefreshReport();
+
+        }
+
+
         public void BILL(int ID)
         {
 
             String sql = @"SELECT  THUCUONG.TEN, CHITIETHOADON.SOLUONG, CHITIETHOADON.GIATIEN, HOADON.TONGTIEN
-FROM THUCUONG,HOADON,CHITIETHOADON 
-WHERE THUCUONG.IDTU = CHITIETHOADON.IDTU
-AND HOADON.IDHD = CHITIETHOADON.IDHD 
-AND HOADON.IDHD = " + ID;
+                            FROM THUCUONG,HOADON,CHITIETHOADON 
+                            WHERE THUCUONG.IDTU = CHITIETHOADON.IDTU
+                            AND HOADON.IDHD = CHITIETHOADON.IDHD 
+                            AND HOADON.IDHD = " + ID;
 
             string sql2 = 
                 @"SELECT  TOP 1 HOADON.IDHD,  HOADON.TONGTIEN,HOADON.THOIGIAN
@@ -56,9 +81,7 @@ AND HOADON.IDHD = " + ID;
 
 
 
-            //Khai báo chế độ xử lý báo cáo, trong trường hợp này lấy báo cáo ở local
             reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
-            //Đường dẫn báo cáo
             reportViewer1.LocalReport.ReportPath = "HoaDon.rdlc";
 
             reportViewer1.LocalReport.DataSources.Clear();
@@ -80,8 +103,7 @@ AND HOADON.IDHD = " + ID;
         private void Form2_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'db_qlcfDataSet.HOADON' table. You can move, or remove it, as needed.
-          
-            BILL(ID);
+            testBILLSP(ID);
         }
     }
 }

@@ -62,14 +62,24 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (!Form1.Instance.PnlContainer.Controls.ContainsKey("XemHoadon"))
+
+            if (!Form1.Instance.PnlContainer.Controls.ContainsKey("DashBoard"))
             {
-                XemHoaDon xemhoadon = new XemHoaDon();
-                xemhoadon.Dock = DockStyle.Fill;
-                Form1.Instance.PnlContainer.Controls.Add(xemhoadon);
+                DashBoard dashboard = new DashBoard();
+                dashboard.Dock = DockStyle.Fill;
+                Form1.Instance.PnlContainer.Controls.Add(dashboard);
 
             }
-            Form1.Instance.PnlContainer.Controls["XemHoaDon"].BringToFront();
+            Form1.Instance.PnlContainer.Controls["DashBoard"].BringToFront();
+            //Form1.Instance.PnlContainer.Controls["XemHoaDon"].BringToFront();
+            //if (!Form1.Instance.PnlContainer.Controls.ContainsKey("XemHoadon"))
+            //{
+            //    XemHoaDon xemhoadon = new XemHoaDon();
+            //    xemhoadon.Dock = DockStyle.Fill;
+            //    Form1.Instance.PnlContainer.Controls.Add(xemhoadon);
+
+            //}
+            //Form1.Instance.PnlContainer.Controls["XemHoaDon"].BringToFront();
         }
 
 

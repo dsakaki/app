@@ -236,8 +236,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ThucUong</DataSetName>
-            <Top>1.73313in</Top>
-            <Left>1.9484in</Left>
+            <Top>0.79563in</Top>
+            <Left>0.26958in</Left>
             <Height>0.92708in</Height>
             <Width>1.23958in</Width>
             <Style>
@@ -445,8 +445,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ChiTietHoaDon</DataSetName>
-            <Top>1.73313in</Top>
-            <Left>3.14458in</Left>
+            <Top>0.79563in</Top>
+            <Left>1.46576in</Left>
             <Height>0.92708in</Height>
             <Width>3.28646in</Width>
             <ZIndex>1</ZIndex>
@@ -456,39 +456,6 @@
               </Border>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox61">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>BILL CỰC MẠNH</Value>
-                    <Style>
-                      <FontFamily>Bahnschrift</FontFamily>
-                      <FontSize>28pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox61</rd:DefaultName>
-            <Top>0.11333in</Top>
-            <Left>2.10292in</Left>
-            <Height>0.58333in</Height>
-            <Width>3.35417in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix9">
             <TablixBody>
               <TablixColumns>
@@ -713,11 +680,11 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ONLYID</DataSetName>
-            <Top>0.8425in</Top>
-            <Left>2.48833in</Left>
+            <Top>0.06944in</Top>
+            <Left>0.26958in</Left>
             <Height>0.54166in</Height>
             <Width>4.26042in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -725,11 +692,55 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>3.33333in</Height>
+        <Height>4.72916in</Height>
         <Style />
       </Body>
-      <Width>7.99875in</Width>
+      <Width>5.06125in</Width>
       <Page>
+        <PageHeader>
+          <Height>1in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox61">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>BILL CỰC MẠNH</Value>
+                      <Style>
+                        <FontFamily>Bahnschrift</FontFamily>
+                        <FontSize>28pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox61</rd:DefaultName>
+              <Top>0.17583in</Top>
+              <Left>0.43798in</Left>
+              <Height>0.58333in</Height>
+              <Width>3.35417in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
         <TopMargin>1in</TopMargin>

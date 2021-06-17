@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.Reporting.WinForms;
 
 namespace WindowsFormsApp1
 {
@@ -47,7 +48,7 @@ namespace WindowsFormsApp1
         public void Chart(string NgayThangNam)
         {
             chart1.Series[0].Points.Clear();
-            chart2.Series[0].Points.Clear();
+            //chart2.Series[0].Points.Clear();
             dbConnection db = new dbConnection();
             List<string> Query = new List<string>();
           
@@ -84,7 +85,7 @@ namespace WindowsFormsApp1
                 while (reader.Read())
                 {
                     chart1.Series[0].Points.AddXY(title, reader[0].ToString());
-                    chart2.Series[0].Points.AddXY(title, reader[0].ToString());
+                    //chart2.Series[0].Points.AddXY(title, reader[0].ToString());
                 }
                 reader.Close();
                 i++;
@@ -122,6 +123,7 @@ namespace WindowsFormsApp1
         {
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy/MM/dd";
+            comboBox1.SelectedIndex = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -154,16 +156,72 @@ namespace WindowsFormsApp1
             SqlCommand sqlc = new SqlCommand(Query, db.Con);
 
             SqlDataReader reader = sqlc.ExecuteReader();
-                
+            chart1.Series[0].Points.Clear();
             while (reader.Read())
             {
-                chart2.Series[0].Points.AddXY(comboBox1.SelectedItem.ToString(), reader[0].ToString());
+                chart1.Series[0].Points.AddXY(comboBox1.SelectedItem.ToString(), reader[0].ToString());
                // chart2.Series[0].Points.AddXY(comboBox1.SelectedItem.ToString(), reader[0].ToString());
             }
             reader.Close();
 
             db.closeConnection();
 
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (!Form1.Instance.PnlContainer.Controls.ContainsKey("DashBoard1"))
+            {
+                DashBoard1 dasboard1 = new DashBoard1();
+                dasboard1.Dock = DockStyle.Fill;
+                Form1.Instance.PnlContainer.Controls.Add(dasboard1);
+            }
+            Form1.Instance.PnlContainer.Controls["DashBoard1"].BringToFront();
+            
+        }
+
+        private void btnSLNgay_Click(object sender, EventArgs e)
+        {
+            dbConnection db = new dbConnection();
+            db.openConnection();
+            string ngay, thang, nam;
+            ngay = DateTime.Today.Day.ToString();
+            thang = DateTime.Today.Month.ToString();
+            nam = DateTime.Today.Year.ToString();
+
+            SqlCommand cmd = new SqlCommand("GetThucUongTheoNgayThangNam", db.Con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@NGAY", ngay);
+            cmd.Parameters.AddWithValue("@THANG", thang);
+            cmd.Parameters.AddWithValue("@NAM", nam);
+            DataTable dt = new DataTable();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            adp.SelectCommand = cmd;
+            adp.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells ;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+            chart2.Series[0].Points.Clear();
+            chart2.DataSource = dt;
+            chart2.Series[0].XValueMember = "TENTU";
+            chart2.Series[0].YValueMembers = "DEM";
+            chart2.Show();
+            db.closeConnection();
+            db.disPose();
+            dt.Dispose();
+            adp.Dispose();
+
+
+
+        }
+
+        private void chart2_Click(object sender, EventArgs e)
+        {
 
         }
     }

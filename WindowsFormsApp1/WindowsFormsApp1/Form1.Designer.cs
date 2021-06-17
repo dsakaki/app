@@ -88,15 +88,16 @@
             // 
             this.btnBlank01.CausesValidation = false;
             this.btnBlank01.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBlank01.Enabled = false;
             this.btnBlank01.FlatAppearance.BorderSize = 0;
             this.btnBlank01.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBlank01.Location = new System.Drawing.Point(739, 0);
             this.btnBlank01.Name = "btnBlank01";
             this.btnBlank01.Size = new System.Drawing.Size(67, 54);
             this.btnBlank01.TabIndex = 1;
+            this.btnBlank01.Text = "AA";
             this.btnBlank01.UseMnemonic = false;
             this.btnBlank01.UseVisualStyleBackColor = false;
+            this.btnBlank01.Click += new System.EventHandler(this.btnBlank01_Click);
             // 
             // About
             // 

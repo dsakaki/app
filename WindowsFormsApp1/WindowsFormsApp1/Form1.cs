@@ -182,6 +182,17 @@ namespace WindowsFormsApp1
 
         }
 
+        private void btnBlank01_Click(object sender, EventArgs e)
+        {
+            if (!Form1.Instance.PnlContainer.Controls.ContainsKey("DashBoard1"))
+            {
+                DashBoard1 dasbroadd1 = new DashBoard1();
+                dasbroadd1.Dock = DockStyle.Fill;
+                Form1.Instance.PnlContainer.Controls.Add(dasbroadd1);
+            }
+            Form1.Instance.PnlContainer.Controls["DashBoard1"].BringToFront();
+           
+        }
     }
 
 }

@@ -35,6 +35,17 @@ namespace WindowsFormsApp1
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            if (!Form1.Instance.PnlContainer.Controls.ContainsKey("DashBoard"))
+            {
+                DashBoard dbord = new DashBoard();
+                dbord.Dock = DockStyle.Fill;
+                Form1.Instance.PnlContainer.Controls.Add(dbord);
+
+            }
+            Form1.Instance.PnlContainer.Controls["DashBoard"].BringToFront();
+
+
+
             //            //Khai báo câu lệnh SQL
             //            String sql = @"SELECT  THUCUONG.TEN, CHITIETHOADON.SOLUONG, CHITIETHOADON.GIATIEN HOADON.TONGTIEN 
             //FROM THUCUONG,HOADON,CHITIETHOADON 

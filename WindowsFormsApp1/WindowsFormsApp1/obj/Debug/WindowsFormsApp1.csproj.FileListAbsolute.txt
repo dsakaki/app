@@ -93,5 +93,11 @@ E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\pt\Microsoft.ReportViewer.Win
 E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
-E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Report2.rdlc
 E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\HoaDon.rdlc
+E:\app\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.DashBoard.resources
+E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Report1.rdlc
+E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\EntityFramework.dll
+E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\EntityFramework.SqlServer.dll
+E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\EntityFramework.xml
+E:\app\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\EntityFramework.SqlServer.xml
+E:\app\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.DashBoard1.resources
