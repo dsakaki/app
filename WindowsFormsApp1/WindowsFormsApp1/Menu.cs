@@ -175,10 +175,10 @@ namespace WindowsFormsApp1
 					Form1.Instance.PnlContainer.Controls.Add(test);
 				}
 				Form1.Instance.PnlContainer.Controls["test"].BringToFront();
-				label1.Text = "Tổng tiền";
-				_tongtien = 0;
-				cthd.Clear();
-				listView1.Items.Clear();
+				//label1.Text = "Tổng tiền";
+				//_tongtien = 0;
+				//cthd.Clear();
+				//listView1.Items.Clear();
 			}
 		}
 

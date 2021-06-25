@@ -59,15 +59,22 @@ namespace WindowsFormsApp1
             ab.BringToFront();
             board.SendToBack();
             showHideButton(false);
-            btnMenu.Enabled = false;
-            btnBlank01.Enabled = true;
+            initForm(false);
 
         }
 
-        public void initForm()
+        public void initForm(bool check)
         {
-            btnMenu.Enabled = true;
-            btnBlank01.Enabled = true;
+            if (check) 
+            { 
+                btnMenu.Enabled = true;
+                btnBlank01.Enabled = true;
+            }
+            else
+            {
+                btnMenu.Enabled = false;
+                btnBlank01.Enabled = false;
+            }
 
         }
 

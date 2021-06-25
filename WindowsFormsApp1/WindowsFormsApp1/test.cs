@@ -229,12 +229,19 @@ namespace WindowsFormsApp1
             tongtien = 0;
             tiennhap = 0;
 
-            Form1.Instance.PnlContainer.Controls["Menu"].BringToFront();
             Form1.Instance.soluongtrongngay();
 
             Form2 x = new Form2();
             x.ID = ID;
             x.Show();
+
+            Menu menu = new Menu();
+            menu.Dock = DockStyle.Fill;
+
+            Form1.Instance.PnlContainer.Controls.RemoveByKey("Menu");
+            Form1.Instance.PnlContainer.Controls.Add(menu);
+            Form1.Instance.PnlContainer.Controls["Menu"].BringToFront();
+
         }
     }
 }
