@@ -29,14 +29,20 @@ namespace WindowsFormsApp1
                 return _obj;
             }
         }
+        string _username;
+        public string Username
+        { 
+            get => _username; 
+            set => _username = value; 
+        }
 
-      
         public Panel PnlContainer
         {
             get { return pnlMain; }
             set { pnlMain = value; }
         }
 
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,9 +59,24 @@ namespace WindowsFormsApp1
             ab.BringToFront();
             board.SendToBack();
             showHideButton(false);
-            soluongtrongngay();
+            btnMenu.Enabled = false;
+            btnBlank01.Enabled = true;
 
         }
+
+        public void initForm()
+        {
+            btnMenu.Enabled = true;
+            btnBlank01.Enabled = true;
+
+        }
+
+
+
+
+
+
+
 
         private void About_Click(object sender, EventArgs e)
         {
@@ -181,6 +202,8 @@ namespace WindowsFormsApp1
                 btnMenu.Enabled = false;
 
         }
+
+
 
         private void btnBlank01_Click(object sender, EventArgs e)
         {

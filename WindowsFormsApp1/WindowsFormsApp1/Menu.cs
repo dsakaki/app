@@ -146,32 +146,40 @@ namespace WindowsFormsApp1
 		}
 		private void button1_Click(object sender, EventArgs e)
 		{
-			test test = new test();
-			test.Dock = DockStyle.Fill;
-			test.tongtien = _tongtien;
-			test.initBill();
-			int tmptongtien = 0;
-			foreach (ChiTietHoaDon v in cthd)
-				tmptongtien += v.GIATIEN * v.SOLUONG;
-			HoaDon hd = new HoaDon(cthd);
-			hd.TONGTIEN = tmptongtien;
-			test.Hoadon = hd;
-			if (!Form1.Instance.PnlContainer.Controls.ContainsKey("test"))
+			if (listView1.Items.Count == 0)
 			{
-
-				Form1.Instance.PnlContainer.Controls.Add(test);
+				MessageBox.Show("Chưa chọn món");
 			}
 			else
 			{
 
-				Form1.Instance.PnlContainer.Controls.RemoveByKey("test");
-				Form1.Instance.PnlContainer.Controls.Add(test);
+				test test = new test();
+				test.Dock = DockStyle.Fill;
+				test.tongtien = _tongtien;
+				test.initBill();
+				int tmptongtien = 0;
+				foreach (ChiTietHoaDon v in cthd)
+					tmptongtien += v.GIATIEN * v.SOLUONG;
+				HoaDon hd = new HoaDon(cthd);
+				hd.TONGTIEN = tmptongtien;
+				test.Hoadon = hd;
+				if (!Form1.Instance.PnlContainer.Controls.ContainsKey("test"))
+				{
+
+					Form1.Instance.PnlContainer.Controls.Add(test);
+				}
+				else
+				{
+
+					Form1.Instance.PnlContainer.Controls.RemoveByKey("test");
+					Form1.Instance.PnlContainer.Controls.Add(test);
+				}
+				Form1.Instance.PnlContainer.Controls["test"].BringToFront();
+				label1.Text = "Tổng tiền";
+				_tongtien = 0;
+				cthd.Clear();
+				listView1.Items.Clear();
 			}
-			Form1.Instance.PnlContainer.Controls["test"].BringToFront();
-			label1.Text = "Tổng tiền";
-			_tongtien = 0;
-			cthd.Clear();
-			listView1.Items.Clear();
 		}
 
 	}
