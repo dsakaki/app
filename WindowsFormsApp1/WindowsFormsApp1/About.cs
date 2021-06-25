@@ -61,14 +61,19 @@ namespace WindowsFormsApp1
                                   Convert.ToBase64String(salt)))
                 MessageBox.Show("Đăng nhập thành công username " + tk, "Đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 panel3.Hide();
-                Form1.Instance.Username = tk;
-                Form1.Instance.initForm();
+
                 label2.Text = "Tài khoản: "+tk;
                 label2.Font = new System.Drawing.Font(label2.Font.FontFamily.Name, 30);
+
+                Form1.Instance.Username = tk;
+                Form1.Instance.initForm(true);
+
+                txtPass.Text = txtUserName.Text = "";
             }
             else
             {
                 MessageBox.Show("Tên đăng nhập và mật khẩu không chính xác!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPass.Text = "";
             }
 
           
@@ -131,6 +136,17 @@ namespace WindowsFormsApp1
 
             //}
             //Form1.Instance.PnlContainer.Controls["XemHoaDon"].BringToFront();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Form1.Instance.Username = "";
+            Form1.Instance.initForm(false);
+            panel3.Show();
+            txtUserName.Select();
+            
+
+
         }
     }
 }
