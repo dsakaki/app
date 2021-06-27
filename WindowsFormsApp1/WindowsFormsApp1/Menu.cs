@@ -28,12 +28,12 @@ namespace WindowsFormsApp1
 			ChiTietHoaDon tmp = new ChiTietHoaDon();
 			tmp.IDTU = int.Parse(button.Name);
 			tmp.GIATIEN = int.Parse(button.Tag.ToString());
-			
-            if (!(cthd.Exists(x => x.IDTU == tmp.IDTU)))
+			tmp.TENTU = button.Text;
+
+			if (!(cthd.Exists(x => x.IDTU == tmp.IDTU)))
             {
 				tmp.SOLUONG = 1;
 				cthd.Add(tmp);
-
 				string[] row = { button.Text, "1", button.Tag + "" };
                 var listviewitem = new ListViewItem(row);
                 listView1.Items.Add(listviewitem);
@@ -50,64 +50,9 @@ namespace WindowsFormsApp1
                 _tongtien += tmp.GIATIEN;
             }
 
-			//ThucUong tu = new ThucUong();
-			//tu.IDTU = int.Parse(button.Name.ToString());
-			//tu.GIATIEN = int.Parse(button.Tag.ToString());
-			//tu.TEN = button.Text;
-
-			//Bill cBill = new Bill();
-
-			//if (!(listBill.Exists(x => x.IDTU == tu.IDTU)))
-			//         {
-
-			//	cBill.IDTU = tu.IDTU;
-			//	cBill.Fbill.Add(tu);
-			//	cBill.SOLUONG = 1;
-			//	cBill.TIEN = tu.GIATIEN;
-
-			//	string[] row = { tu.TEN,"1",tu.GIATIEN+"" };
-			//	var listViewItem = new ListViewItem(row);
-			//	listView1.Items.Add(listViewItem);
-			//	_tongtien += int.Parse(cBill.TIEN.ToString());
-			//	listBill.Add(cBill);
-
-			//}
-			//         else
-			//{
-			//	int tmpSL =int.Parse(listView1.FindItemWithText(tu.TEN).SubItems[1].Text.ToString());
-			//	tmpSL++;
-			//	listView1.FindItemWithText(tu.TEN).SubItems[1].Text = tmpSL.ToString();
-			//	listView1.FindItemWithText(tu.TEN).SubItems[2].Text = (tmpSL * tu.GIATIEN) +"";
-			//	listBill.Where(x => x.IDTU == tu.IDTU).Select(c => { c.SOLUONG = tmpSL; return c; }).ToList();
-			//	//listBill.Where(x => x.IDTU == tu.IDTU).Select(c => { c.TIEN += tu.GIATIEN; return c; }).ToList();
-			//	_tongtien += tu.GIATIEN;
-			//}
-
-			//Button button = (Button)sender;
-			//string[] array = new string[3]
-			//{
-			//button.Text,
-			//"1",
-			//button.Tag?.ToString() ?? ""
-			//};
-			//ListViewItem listViewItem = new ListViewItem(array);
-			//listViewItem.Name = button.Text;
-			//if (!listView1.Items.ContainsKey(button.Text))
-			//{
-			//	listView1.Items.Add(listViewItem);
-			//	_tongtien += int.Parse(array[2]);
-			//}
-			//else
-			//{
-			//	int num = int.Parse(listView1.Items[button.Text].SubItems[1].Text);
-			//	num++;
-			//	listView1.Items[button.Text].SubItems[1].Text = (num.ToString() ?? "");
-			//	int num2 = int.Parse(array[2]);
-			//	int num3 = num * num2;
-			//	listView1.Items[button.Text].SubItems[2].Text = (num3.ToString() ?? "");
-			//	_tongtien += num2;
-			//}
 			label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
+			listView1.Items[listView1.Items.Count-1].Selected = true;
+
 		}
 
 		private void Menu_Load(object sender, EventArgs e)
@@ -143,6 +88,8 @@ namespace WindowsFormsApp1
 				}
 			}
 			dbConnection.closeConnection();
+
+
 		}
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -182,5 +129,32 @@ namespace WindowsFormsApp1
 			}
 		}
 
-	}
+		private void btnXoa_Click(object sender, EventArgs e)
+		{
+			if (listView1.SelectedItems.Count > 0)
+			{
+				ListViewItem item = listView1.SelectedItems[0];
+				listView1.Items.Remove(item);
+				cthd.RemoveAll(x => x.TENTU == item.Text);
+				int tmp = 0;
+				foreach (ListViewItem itemRow in listView1.Items)
+					//MessageBox.Show(itemRow.SubItems[2].ToString());
+					tmp += int.Parse(itemRow.SubItems[2].Text.ToString());
+				_tongtien = tmp;
+				label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
+				if(listView1.Items.Count - 1 >= 0 )
+					listView1.Items[listView1.Items.Count - 1].Selected = true;
+			}
+		}
+
+
+        private void btnXoaHet_Click(object sender, EventArgs e)
+        {
+			listView1.Items.Clear();
+			_tongtien = 0;
+			label1.Text = "TỔNG TIỀN";
+			cthd.Clear();
+
+		}
+    }
 }

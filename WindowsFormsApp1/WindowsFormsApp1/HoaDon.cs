@@ -9,6 +9,7 @@ namespace WindowsFormsApp1
     class ChiTietHoaDon
     {
         int _IDHD;
+        string _TENTU;
         int _IDTU;
         int _SOLUONG;
         int _GIATIEN;
@@ -17,6 +18,8 @@ namespace WindowsFormsApp1
         public int IDTU { get => _IDTU; set => _IDTU = value; }
         public int SOLUONG { get => _SOLUONG; set => _SOLUONG = value; }
         public int GIATIEN { get => _GIATIEN; set => _GIATIEN = value; }
+        public string TENTU { get => _TENTU; set => _TENTU = value; }
+
         public ChiTietHoaDon()
         {
         }

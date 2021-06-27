@@ -36,7 +36,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pL = new System.Windows.Forms.Panel();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnXoaHet = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
+            this.pL.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -61,9 +65,11 @@
             this.TIEN});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.HoverSelection = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(340, 309);
             this.listView1.TabIndex = 3;
@@ -118,10 +124,41 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(832, 379);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
+            // pL
+            // 
+            this.pL.Controls.Add(this.btnXoaHet);
+            this.pL.Controls.Add(this.btnXoa);
+            this.pL.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pL.Location = new System.Drawing.Point(0, 323);
+            this.pL.Name = "pL";
+            this.pL.Size = new System.Drawing.Size(832, 56);
+            this.pL.TabIndex = 0;
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.Location = new System.Drawing.Point(356, 6);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(84, 50);
+            this.btnXoa.TabIndex = 0;
+            this.btnXoa.Text = "Xoá";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnXoaHet
+            // 
+            this.btnXoaHet.Location = new System.Drawing.Point(480, 6);
+            this.btnXoaHet.Name = "btnXoaHet";
+            this.btnXoaHet.Size = new System.Drawing.Size(84, 50);
+            this.btnXoaHet.TabIndex = 1;
+            this.btnXoaHet.Text = "Xoá hết";
+            this.btnXoaHet.UseVisualStyleBackColor = true;
+            this.btnXoaHet.Click += new System.EventHandler(this.btnXoaHet_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pL);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Name = "Menu";
@@ -129,6 +166,7 @@
             this.Load += new System.EventHandler(this.Menu_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pL.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -143,5 +181,8 @@
         private System.Windows.Forms.ColumnHeader Ten;
         private System.Windows.Forms.ColumnHeader SL;
         private System.Windows.Forms.ColumnHeader TIEN;
+        private System.Windows.Forms.Panel pL;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnXoaHet;
     }
 }
