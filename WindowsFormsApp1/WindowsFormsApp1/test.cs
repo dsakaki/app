@@ -168,11 +168,16 @@ namespace WindowsFormsApp1
             var button = (Button)sender;
             int tmptien = int.Parse(button.Tag.ToString());
             tiennhap += tmptien;
-            label2.Text = tiennhap+"";
+            label2.Text = tiennhap + "";
 
 
             if (int.Parse(label2.Text) >= int.Parse(label1.Text))
                 btn_Thanhtoan.Enabled = true;
+            int tienthoi = tiennhap - _tongtien;
+            if (tienthoi < 0)
+                label3.Text = "CHƯA ĐỦ TIỀNNNNNNNNNN";
+            else
+            label3.Text = tienthoi + "";
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -192,15 +197,19 @@ namespace WindowsFormsApp1
             db.openConnection();
 
             string query = "INSERT INTO HOADON";
-            query += " VALUES (@TONGTIEN, @THOIGIAN)";
+            query += " VALUES (@TONGTIEN,@TIENDUA,@TIENTRA,@THOIGIAN)";
 
            
-                SqlCommand myCommand = new SqlCommand(query, db.Con);
-                myCommand.Parameters.AddWithValue("@TONGTIEN", hoadon.TONGTIEN);
-                myCommand.Parameters.AddWithValue("@THOIGIAN", DateTime.Now);
-                myCommand.ExecuteNonQuery();
+            SqlCommand myCommand = new SqlCommand(query, db.Con);
+            myCommand.Parameters.AddWithValue("@TONGTIEN", hoadon.TONGTIEN);
+            myCommand.Parameters.AddWithValue("@TIENDUA", tiennhap);
+            myCommand.Parameters.AddWithValue("@TIENTRA", tiennhap - hoadon.TONGTIEN);
+            myCommand.Parameters.AddWithValue("@THOIGIAN", DateTime.Now);
+            myCommand.ExecuteNonQuery();
 
-                Int32 ID = Convert.ToInt32(db.sqlExecuteScalar("SELECT Count(*) FROM HOADON"));
+            Int32 ID = Convert.ToInt32(db.sqlExecuteScalar("SELECT Count(*) FROM HOADON"));
+            if (ID == 0)
+                ID++;
             try
             {
 
