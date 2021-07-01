@@ -19,44 +19,42 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-		//List<Bill> listBill = new List<Bill>();
-		List<ChiTietHoaDon> cthd = new List<ChiTietHoaDon>();
 
+		List<ChiTietHoaDon> cthd = new List<ChiTietHoaDon>();
 		private void ButtonClickHandler(object sender, EventArgs e)
 		{
+
 			var button = (Button)sender;
 			ChiTietHoaDon tmp = new ChiTietHoaDon();
 			tmp.IDTU = int.Parse(button.Name);
 			tmp.GIATIEN = int.Parse(button.Tag.ToString());
 			tmp.TENTU = button.Text;
 
-			if (!(cthd.Exists(x => x.IDTU == tmp.IDTU)))
-            {
-				tmp.SOLUONG = 1;
-				cthd.Add(tmp);
-				string[] row = { button.Text, "1", button.Tag + "" };
-                var listviewitem = new ListViewItem(row);
-                listView1.Items.Add(listviewitem);
-                _tongtien += int.Parse(tmp.GIATIEN.ToString());
+			foreach (DataGridViewRow row in dataGridView1.Rows)
+				if (!(row.Cells[0].Value == null) && row.Cells[0].Value.ToString().Equals(tmp.TENTU))
+				{
+					row.Cells[1].Value = int.Parse(row.Cells[1].Value.ToString()) + 1;
+					row.Cells[2].Value = int.Parse(row.Cells[1].Value.ToString()) * tmp.GIATIEN;
+					_tongtien += (int)tmp.GIATIEN;
+					label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
+					return;
+				}
 
-            }
-			else
-            {
-				int tmpSL = int.Parse(listView1.FindItemWithText(button.Text).SubItems[1].Text.ToString());
-                tmpSL++;
-                listView1.FindItemWithText(button.Text).SubItems[1].Text = tmpSL.ToString();
-                listView1.FindItemWithText(button.Text).SubItems[2].Text = (tmpSL * tmp.GIATIEN).ToString();
-				cthd.Where(x => x.IDTU == tmp.IDTU).Select(c => { c.SOLUONG = tmpSL; return c; }).ToList();
-                _tongtien += tmp.GIATIEN;
-            }
+			dataGridView1.Rows.Add(button.Text, "1", button.Tag + "");
+			cthd.Add(tmp);
+			_tongtien += int.Parse(tmp.GIATIEN.ToString());
 
 			label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
-			listView1.Items[listView1.Items.Count-1].Selected = true;
 
 		}
 
+
+
+
 		private void Menu_Load(object sender, EventArgs e)
 		{
+			
+
 			flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
 			flowLayoutPanel1.Padding = new Padding(0, 20, 0, 0);
 
@@ -93,7 +91,7 @@ namespace WindowsFormsApp1
 		}
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (listView1.Items.Count == 0)
+			if (dataGridView1.Rows.Count == 0)
 			{
 				MessageBox.Show("Chưa chọn món");
 			}
@@ -105,16 +103,26 @@ namespace WindowsFormsApp1
 				test.tongtien = _tongtien;
 				test.initBill();
 				int tmptongtien = 0;
-				foreach (ChiTietHoaDon v in cthd)
-					tmptongtien += v.GIATIEN * v.SOLUONG;
+
+
+				for (int rows = 0; rows < dataGridView1.Rows.Count; rows++)
+				{
+					
+					cthd[rows].SOLUONG = int.Parse(dataGridView1.Rows[rows].Cells[1].Value.ToString());
+					cthd[rows].GIATIEN = int.Parse(dataGridView1.Rows[rows].Cells[2].Value.ToString());
+						
+				}
+
+
 				HoaDon hd = new HoaDon(cthd);
+				foreach (ChiTietHoaDon c in cthd)
+					tmptongtien += c.GIATIEN;
 				hd.TONGTIEN = tmptongtien;
 				test.Hoadon = hd;
-				if (!Form1.Instance.PnlContainer.Controls.ContainsKey("test"))
-				{
 
+				if (!Form1.Instance.PnlContainer.Controls.ContainsKey("test"))
 					Form1.Instance.PnlContainer.Controls.Add(test);
-				}
+
 				else
 				{
 
@@ -122,39 +130,94 @@ namespace WindowsFormsApp1
 					Form1.Instance.PnlContainer.Controls.Add(test);
 				}
 				Form1.Instance.PnlContainer.Controls["test"].BringToFront();
-				//label1.Text = "Tổng tiền";
-				//_tongtien = 0;
-				//cthd.Clear();
-				//listView1.Items.Clear();
+				cthd.Clear();
 			}
 		}
 
 		private void btnXoa_Click(object sender, EventArgs e)
 		{
-			if (listView1.SelectedItems.Count > 0)
-			{
-				ListViewItem item = listView1.SelectedItems[0];
-				listView1.Items.Remove(item);
-				cthd.RemoveAll(x => x.TENTU == item.Text);
-				int tmp = 0;
-				foreach (ListViewItem itemRow in listView1.Items)
-					//MessageBox.Show(itemRow.SubItems[2].ToString());
-					tmp += int.Parse(itemRow.SubItems[2].Text.ToString());
-				_tongtien = tmp;
-				label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
-				if(listView1.Items.Count - 1 >= 0 )
-					listView1.Items[listView1.Items.Count - 1].Selected = true;
-			}
+			//if (listView1.SelectedItems.Count > 0)
+			//{
+			//	ListViewItem item = listView1.SelectedItems[0];
+			//	listView1.Items.Remove(item);
+			//	cthd.RemoveAll(x => x.TENTU == item.Text);
+			//	int tmp = 0;
+			//	foreach (ListViewItem itemRow in listView1.Items)
+			//		//MessageBox.Show(itemRow.SubItems[2].ToString());
+			//		tmp += int.Parse(itemRow.SubItems[2].Text.ToString());
+			//	_tongtien = tmp;
+			//	label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
+			//	if(listView1.Items.Count - 1 >= 0 )
+			//		listView1.Items[listView1.Items.Count - 1].Selected = true;
+			//}
 		}
 
 
         private void btnXoaHet_Click(object sender, EventArgs e)
         {
-			listView1.Items.Clear();
+			dataGridView1.Rows.Clear();
 			_tongtien = 0;
 			label1.Text = "TỔNG TIỀN";
 			cthd.Clear();
 
+		}
+
+		public void updateTien()
+        {
+			_tongtien = 0;
+			foreach (DataGridViewRow row in dataGridView1.Rows)
+				_tongtien += int.Parse(row.Cells[2].Value.ToString());
+
+			label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
+
+		}
+
+
+      
+		public void ClickTang(int RowIndex)
+		{
+			string values = dataGridView1[0, RowIndex].Value.ToString();
+			int sl = int.Parse(dataGridView1[1, RowIndex].Value.ToString());
+			int tien = int.Parse(dataGridView1[2, RowIndex].Value.ToString());
+			sl++;
+			dataGridView1[1, RowIndex].Value = sl;
+			dataGridView1[2, RowIndex].Value = (tien / (sl-1)) * (sl) ;
+			updateTien();
+
+		}
+
+		public void ClickGiam(int RowIndex)
+		{
+			string values = dataGridView1[0, RowIndex].Value.ToString();
+			int sl = int.Parse(dataGridView1[1, RowIndex].Value.ToString());
+			int tien = int.Parse(dataGridView1[2, RowIndex].Value.ToString());
+			sl--;
+			if (sl != 0)
+			{ 				
+				
+				dataGridView1[1, RowIndex].Value = sl;
+				dataGridView1[2, RowIndex].Value = (tien / (sl +1)) * (sl);
+			}
+			if(sl == 0)
+            {
+				dataGridView1.Rows.RemoveAt(RowIndex);
+				cthd.RemoveAll(v => v.TENTU.Contains(values));
+			}
+			updateTien();
+			
+		}
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+			var grid = (DataGridView)sender;
+
+			if (e.RowIndex < 0)
+				return;
+
+			if (grid[e.ColumnIndex, e.RowIndex] is DataGridViewButtonCell)
+				if (e.ColumnIndex == 3)
+					ClickTang(e.RowIndex);
+				else
+					ClickGiam(e.RowIndex);
 		}
     }
 }

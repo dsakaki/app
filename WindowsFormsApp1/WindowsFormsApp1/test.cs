@@ -50,15 +50,15 @@ namespace WindowsFormsApp1
 
         private void test_Load(object sender, EventArgs e)
         {
+            
+
             label1.Text = _tongtien + "";
             ButtonLoad();
             btn_Thanhtoan.Enabled = false;
-            //cloneBill = new List<Bill>(FBill);
 
-         
-            //foreach (Bill v in FBill)
-            //    MessageBox.Show(v.IDTU.ToString() + ": " + v.TIEN + "-" + v.SOLUONG + "/" + v.TONGTIEN.ToString());
-            // MessageBox.Show(data);
+            foreach (ChiTietHoaDon v in hoadon.CTHD)
+                MessageBox.Show(v.TENTU.ToString() + "----" + v.GIATIEN + "-" + v.SOLUONG + "/");
+            
 
 
         }
@@ -78,14 +78,23 @@ namespace WindowsFormsApp1
             button.BackColor = System.Drawing.Color.FromArgb(99, 20, 180);
 
         }
+        private void ButtonClicKDuTien(object sender, EventArgs e)
+        {
 
+            tiennhap = _tongtien;
+            label2.Text = tiennhap + "";
 
+            label3.Text = "ĐỦ TIỀN";
+            btn_Thanhtoan.Enabled = true;
+        }
+        
 
         private void ButtonLoad()
         { 
             // Form1.Instance.PnlContainer.Controls["panel1"].Hide();
 
             flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
+            //flowLayoutPanel1.Padding = new Padding(80, 10, 200, 0);
             flowLayoutPanel1.Padding = new Padding(80, 10, 200, 0);
             List<Button> buttonList = new List<Button>();
 
@@ -157,7 +166,15 @@ namespace WindowsFormsApp1
                 flowLayoutPanel1.Controls.Add(b);
 
             }
-
+            Button bt = new Button();
+            bt.Text = "ĐỦ TIỀN";
+            bt.Font = new Font("Arial", 30);
+            bt.ForeColor = Color.White;
+            bt.Size = new System.Drawing.Size(760, 80);
+            bt.Click += ButtonClicKDuTien;
+            bt.MouseHover += btn_MouseHover;
+            bt.MouseLeave += btn_MouseLeave;
+            flowLayoutPanel1.Controls.Add(bt);
 
         }
 
