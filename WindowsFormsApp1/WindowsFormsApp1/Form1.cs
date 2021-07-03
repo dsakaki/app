@@ -58,7 +58,6 @@ namespace WindowsFormsApp1
 
             ab.BringToFront();
             board.SendToBack();
-            showHideButton(false);
             initForm(false);
 
         }
@@ -101,7 +100,6 @@ namespace WindowsFormsApp1
            //     pnlMain.Controls["About"].Visible = false;
 
            // }
-            showHideButton(false);
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
@@ -109,14 +107,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void showHideButton(Boolean b)
-        {
-        
-                btnXoa.Visible = b;
-                button2.Visible = b;
-                button3.Visible = b;
-
-        }
+       
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -126,7 +117,6 @@ namespace WindowsFormsApp1
                 test.Dock = DockStyle.Fill;
                 Form1.Instance.PnlContainer.Controls.Add(test);
             }
-            showHideButton(true);
             Form1.Instance.PnlContainer.Controls["Menu"].BringToFront();
         }
 
@@ -139,7 +129,6 @@ namespace WindowsFormsApp1
                 Form1.Instance.PnlContainer.Controls.Add(test);
             }
             Form1.Instance.PnlContainer.Controls["Menu"].BringToFront();
-            showHideButton(true);
         }
 
         private void btnBoard_Click(object sender, EventArgs e)
@@ -151,7 +140,6 @@ namespace WindowsFormsApp1
                 Form1.Instance.PnlContainer.Controls.Add(board);
             }
             Form1.Instance.PnlContainer.Controls["Board"].BringToFront();
-            showHideButton(false);
 
         }
 
