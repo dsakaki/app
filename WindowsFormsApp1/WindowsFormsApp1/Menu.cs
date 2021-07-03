@@ -92,9 +92,7 @@ namespace WindowsFormsApp1
 		private void button1_Click(object sender, EventArgs e)
 		{
 			if (dataGridView1.Rows.Count == 0)
-			{
 				MessageBox.Show("Chưa chọn món");
-			}
 			else
 			{
 
@@ -136,24 +134,23 @@ namespace WindowsFormsApp1
 
 		private void btnXoa_Click(object sender, EventArgs e)
 		{
-			//if (listView1.SelectedItems.Count > 0)
-			//{
-			//	ListViewItem item = listView1.SelectedItems[0];
-			//	listView1.Items.Remove(item);
-			//	cthd.RemoveAll(x => x.TENTU == item.Text);
-			//	int tmp = 0;
-			//	foreach (ListViewItem itemRow in listView1.Items)
-			//		//MessageBox.Show(itemRow.SubItems[2].ToString());
-			//		tmp += int.Parse(itemRow.SubItems[2].Text.ToString());
-			//	_tongtien = tmp;
-			//	label1.Text = "TỔNG TIỀN= " + _tongtien.ToString();
-			//	if(listView1.Items.Count - 1 >= 0 )
-			//		listView1.Items[listView1.Items.Count - 1].Selected = true;
-			//}
+			int RowIndex = 0;
+			try 
+			{
+				RowIndex = dataGridView1.CurrentCell.RowIndex;
+				string values = dataGridView1[0, RowIndex].Value.ToString();
+				cthd.RemoveAll(v => v.TENTU.Contains(values));
+				dataGridView1.Rows.RemoveAt(RowIndex);
+				updateTien();
+			}
+            catch
+            {
+				MessageBox.Show("????????");
+            }
 		}
 
 
-        private void btnXoaHet_Click(object sender, EventArgs e)
+		private void btnXoaHet_Click(object sender, EventArgs e)
         {
 			dataGridView1.Rows.Clear();
 			_tongtien = 0;
