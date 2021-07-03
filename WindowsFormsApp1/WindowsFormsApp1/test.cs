@@ -50,15 +50,10 @@ namespace WindowsFormsApp1
 
         private void test_Load(object sender, EventArgs e)
         {
-            
 
             label1.Text = _tongtien + "";
             ButtonLoad();
             btn_Thanhtoan.Enabled = false;
-
-            foreach (ChiTietHoaDon v in hoadon.CTHD)
-                MessageBox.Show(v.TENTU.ToString() + "----" + v.GIATIEN + "-" + v.SOLUONG + "/");
-            
 
 
         }
